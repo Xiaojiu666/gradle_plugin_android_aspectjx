@@ -4,9 +4,9 @@ apply plugin: 'java'
 apply plugin: 'signing'
 apply plugin: 'maven'
 
-group = LIB_GROUP
-version = LIB_VERSION
-project.archivesBaseName = LIB_ARTIFACT
+group = "com.hujiang.aspectjx"
+version = "2.0.10"
+project.archivesBaseName = "gradle-android-plugin-aspectjx"
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
@@ -73,33 +73,33 @@ install {
         pom {
             project {
                 packaging 'jar'
-                name LIB_ARTIFACT // #CONFIG# // project title
-                url SITE_URL
+                name "gradle-android-plugin-aspectjx" // #CONFIG# // project title
+                url "https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx"
 
                 licenses {
                     license {
-                        name LICENCE_NAME
-                        url LICENCE_URL
-                        distribution LICENCE_DIST
+                        name "The Apache Software License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution "repo"
                     }
                 }
                 developers {
                     developer {
-                        id  DEVELOPER_ID
-                        name DEVELOPER_NAME
-                        email DEVELOPER_EMAIL
+                        id  "firefly1126"
+                        name "firefly1126"
+                        email "xiaoming1109@gmail.com"
                     }
                 }
 
                 organization {
-                    name ORGANIZATION_NAME
-                    url ORGANIZATION_URL
+                    name "hujiang, Inc."
+                    url "http://www.hujiang.com"
                 }
 
                 scm {
-                    connection GIT_URL
-                    developerConnection ISSUE_URL
-                    url SITE_URL
+                    connection "https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx.git"
+                    developerConnection "https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx/issues"
+                    url "https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx"
                 }
             }
         }
@@ -112,11 +112,11 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = "maven"
-        name = LIB_ARTIFACT
-        desc = LIB_DES
-        websiteUrl = SITE_URL
-        vcsUrl = GIT_URL
-        issueTrackerUrl = ISSUE_URL
+        name = "gradle-android-plugin-aspectjx"
+        desc = "A Gradle plugin which enables AspectJ for Android builds. supports Kotlin, aar, jar aspect"
+        websiteUrl = "https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx"
+        vcsUrl = "https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx.git"
+        issueTrackerUrl = "https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx/issues"
         licenses = ["Apache-2.0"]
         labels = 'Groovy'
         publicDownloadNumbers = true
