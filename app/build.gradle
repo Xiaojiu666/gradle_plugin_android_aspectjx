@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.hujiang.android-aspectjx'
 
 android {
     compileSdkVersion 30
@@ -30,4 +31,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    implementation 'org.aspectj:aspectjrt:1.8.9'
 }
