@@ -32,7 +32,8 @@ class AJXPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-
+        project.logger.error("AJXPlugin " + project)
+        print("AJXPlugin " + project)
         project.repositories {
             mavenLocal()
         }

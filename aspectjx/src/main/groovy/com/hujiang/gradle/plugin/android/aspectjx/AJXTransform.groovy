@@ -27,9 +27,7 @@ import org.gradle.api.Project
 
 /**
  * class description here
- * @author simon
- * @version 1.0.0
- * @since 2018-03-12
+ * @author simon* @version 1.0.0* @since 2018-03-12
  */
 class AJXTransform extends Transform {
 
@@ -46,7 +44,7 @@ class AJXTransform extends Transform {
 
     @Override
     Set<QualifiedContent.ContentType> getInputTypes() {
-        return ImmutableSet.<QualifiedContent.ContentType>of(QualifiedContent.DefaultContentType.CLASSES)
+        return ImmutableSet.<QualifiedContent.ContentType> of(QualifiedContent.DefaultContentType.CLASSES)
     }
 
     @Override
@@ -67,9 +65,9 @@ class AJXTransform extends Transform {
 
         String transformTaskVariantName = transformInvocation.context.getVariantName()
         VariantCache variantCache = new VariantCache(ajxProcedure.project, ajxProcedure.ajxCache, transformTaskVariantName)
-        
-        ajxProcedure.with(new CheckAspectJXEnableProcedure(project, variantCache, transformInvocation))
 
+        ajxProcedure.with(new CheckAspectJXEnableProcedure(project, variantCache, transformInvocation))
+        project.logger.debug("transform " + transformInvocation.incremental)
         if (transformInvocation.incremental) {
             //incremental build
             ajxProcedure.with(new UpdateAspectFilesProcedure(project, variantCache, transformInvocation))
