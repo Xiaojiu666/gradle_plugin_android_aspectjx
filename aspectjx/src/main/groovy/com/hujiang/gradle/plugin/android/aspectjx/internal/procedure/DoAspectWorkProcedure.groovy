@@ -21,15 +21,15 @@ import com.android.build.api.transform.TransformInvocation
 import com.hujiang.gradle.plugin.android.aspectjx.internal.AJXTask
 import com.hujiang.gradle.plugin.android.aspectjx.internal.AJXTaskManager
 import com.hujiang.gradle.plugin.android.aspectjx.internal.cache.VariantCache
+import groovy.util.logging.Slf4j
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
 
 /**
  * class description here
- * @author simon
- * @version 1.0.0
- * @since 2018-04-23
+ * @author simon* @version 1.0.0* @since 2018-04-23
  */
+@Slf4j
 class DoAspectWorkProcedure extends AbsProcedure {
     AJXTaskManager ajxTaskManager
 
@@ -42,7 +42,7 @@ class DoAspectWorkProcedure extends AbsProcedure {
     @Override
     boolean doWorkContinuously() {
         //do aspectj real work
-        project.logger.debug("~~~~~~~~~~~~~~~~~~~~do aspectj real work")
+        log.debug("DoAspectWorkProcedure do aspectj real work")
         ajxTaskManager.aspectPath << variantCache.aspectDir
         ajxTaskManager.classPath << variantCache.includeFileDir
         ajxTaskManager.classPath << variantCache.excludeFileDir
@@ -51,7 +51,7 @@ class DoAspectWorkProcedure extends AbsProcedure {
         AJXTask ajxTask = new AJXTask(project)
         File includeJar = transformInvocation.getOutputProvider().getContentLocation("include", variantCache.contentTypes,
                 variantCache.scopes, Format.JAR)
-
+        log.debug("DoAspectWorkProcedure" + includeJar.path)
         if (!includeJar.parentFile.exists()) {
             FileUtils.forceMkdir(includeJar.getParentFile())
         }
@@ -66,6 +66,7 @@ class DoAspectWorkProcedure extends AbsProcedure {
         transformInvocation.inputs.each { TransformInput input ->
             input.jarInputs.each { JarInput jarInput ->
                 ajxTaskManager.classPath << jarInput.file
+                log.debug("DoAspectWorkProcedure" + jarInput.file.path)
 
                 if (variantCache.isIncludeJar(jarInput.file.absolutePath)) {
                     AJXTask ajxTask1 = new AJXTask(project)

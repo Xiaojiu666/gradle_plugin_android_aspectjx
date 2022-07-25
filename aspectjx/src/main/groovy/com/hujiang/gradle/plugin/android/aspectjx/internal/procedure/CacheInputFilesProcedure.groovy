@@ -21,6 +21,7 @@ import com.hujiang.gradle.plugin.android.aspectjx.internal.JarMerger
 import com.hujiang.gradle.plugin.android.aspectjx.internal.cache.VariantCache
 import com.hujiang.gradle.plugin.android.aspectjx.internal.concurrent.BatchTaskScheduler
 import com.hujiang.gradle.plugin.android.aspectjx.internal.concurrent.ITask
+import groovy.util.logging.Slf4j
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
 
@@ -30,6 +31,7 @@ import org.gradle.api.Project
  * @version 1.0.0
  * @since 2018-04-23
  */
+@Slf4j
 class CacheInputFilesProcedure extends AbsProcedure {
     CacheInputFilesProcedure(Project project, VariantCache variantCache, TransformInvocation transformInvocation) {
         super(project, variantCache, transformInvocation)

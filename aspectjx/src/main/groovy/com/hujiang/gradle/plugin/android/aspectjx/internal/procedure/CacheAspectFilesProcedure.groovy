@@ -23,6 +23,7 @@ import com.hujiang.gradle.plugin.android.aspectjx.internal.AJXUtils
 import com.hujiang.gradle.plugin.android.aspectjx.internal.cache.VariantCache
 import com.hujiang.gradle.plugin.android.aspectjx.internal.concurrent.BatchTaskScheduler
 import com.hujiang.gradle.plugin.android.aspectjx.internal.concurrent.ITask
+import groovy.util.logging.Slf4j
 import org.gradle.api.Project
 
 import java.util.jar.JarEntry
@@ -34,14 +35,16 @@ import java.util.jar.JarFile
  * @version 1.0.0
  * @since 2018-04-23
  */
+@Slf4j
 class CacheAspectFilesProcedure extends AbsProcedure {
     CacheAspectFilesProcedure(Project project, VariantCache variantCache, TransformInvocation transformInvocation) {
         super(project, variantCache, transformInvocation)
+        log.error("CacheAspectFilesProcedure ")
     }
 
     @Override
     boolean doWorkContinuously() {
-        project.logger.debug("~~~~~~~~~~~~~~~~~~~~cache aspect files")
+        log.error("~~~~~~~~~~~~~~~~~~~~cache aspect files")
         //缓存aspect文件
         BatchTaskScheduler batchTaskScheduler = new BatchTaskScheduler()
 
@@ -53,7 +56,7 @@ class CacheAspectFilesProcedure extends AbsProcedure {
                     Object call() throws Exception {
                         dirInput.file.eachFileRecurse { File item ->
                             if (AJXUtils.isAspectClass(item)) {
-                                project.logger.debug("~~~~~~~~~~~~collect aspect file:${item.absolutePath}")
+                                log.error("~~~~~~~~~~~~~~~~~~~~cache aspect files").debug("~~~~~~~~~~~~collect aspect file:${item.absolutePath}")
                                 String path = item.absolutePath
                                 String subPath = path.substring(dirInput.file.absolutePath.length())
                                 File cacheFile = new File(variantCache.aspectPath + subPath)
@@ -80,7 +83,7 @@ class CacheAspectFilesProcedure extends AbsProcedure {
                                 byte[] bytes = ByteStreams.toByteArray(jarFile.getInputStream(jarEntry))
                                 File cacheFile = new File(variantCache.aspectPath + File.separator + entryName)
                                 if (AJXUtils.isAspectClass(bytes)) {
-                                    project.logger.debug("~~~~~~~~~~~collect aspect file:${entryName}")
+                                    log.error("~~~~~~~~~~~collect aspect file:${entryName}")
                                     variantCache.add(bytes, cacheFile)
                                 }
                             }
