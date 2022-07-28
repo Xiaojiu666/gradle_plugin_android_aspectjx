@@ -76,9 +76,10 @@ class AJXTransform extends Transform {
      如果要处理所有的class字节码，返回TransformManager.SCOPE_FULL_PROJECT
      * @return
      */
+    //TODO 换回SCOPE_FULL_PROJECT
     @Override
     Set<QualifiedContent.Scope> getScopes() {
-        return TransformManager.SCOPE_FULL_PROJECT
+        return TransformManager.PROJECT_ONLY
     }
 
     /**
@@ -103,6 +104,7 @@ class AJXTransform extends Transform {
         Project project = ajxProcedure.project
 
         String transformTaskVariantName = transformInvocation.context.getVariantName()
+        log.error("AJXTransform transformTaskVariantName" + transformTaskVariantName)
         VariantCache variantCache = new VariantCache(ajxProcedure.project, ajxProcedure.ajxCache, transformTaskVariantName)
 
         ajxProcedure.with(new CheckAspectJXEnableProcedure(project, variantCache, transformInvocation))

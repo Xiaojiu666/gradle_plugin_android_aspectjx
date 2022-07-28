@@ -72,6 +72,8 @@ class CacheInputFilesProcedure extends AbsProcedure {
                         if (AJXUtils.countOfFiles(variantCache.excludeFileDir) > 0) {
                             File excludeJar = transformInvocation.getOutputProvider().getContentLocation("exclude", variantCache.contentTypes,
                                     variantCache.scopes, Format.JAR)
+                            log.error("CacheInputFilesProcedure excludeFileDir" + variantCache.excludeFileDir.path)
+                            log.error("CacheInputFilesProcedure excludeJar" + excludeJar.path)
                             AJXUtils.mergeJar(variantCache.excludeFileDir, excludeJar)
                         }
 

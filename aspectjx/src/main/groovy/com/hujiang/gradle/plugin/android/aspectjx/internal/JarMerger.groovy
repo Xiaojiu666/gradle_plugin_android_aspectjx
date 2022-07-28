@@ -45,6 +45,7 @@ class JarMerger {
     private IZipEntryFilter filter
 
     JarMerger(@NonNull File jarFile) throws IOException {
+
         this.jarFile = jarFile
     }
 

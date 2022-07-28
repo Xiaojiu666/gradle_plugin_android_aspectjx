@@ -28,6 +28,7 @@ import org.gradle.api.Project
  * @since 2018-03-14
  */
 class AJXTask implements ITask {
+    def String TAG = getClass().name + " : "
 
     Project project
     String encoding
@@ -91,7 +92,8 @@ class AJXTask implements ITask {
         }
 
         inPath.each {File file ->
-            project.logger.debug("~~~~~~~~~~~~~input file: ${file.absolutePath}")
+//            log.error(TAG + "directoryInputs aspectFile:" + file.absolutePath)
+//            project.logger.debug("~~~~~~~~~~~~~input file: ${file.absolutePath}")
         }
 
         MessageHandler handler = new MessageHandler(true)

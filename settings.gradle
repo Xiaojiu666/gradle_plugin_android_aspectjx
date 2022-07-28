@@ -1,3 +1,4 @@
 include ':app'
 include ':aspectjx'
 rootProject.name = "Aspcectjx"
+include ':mylibrary'

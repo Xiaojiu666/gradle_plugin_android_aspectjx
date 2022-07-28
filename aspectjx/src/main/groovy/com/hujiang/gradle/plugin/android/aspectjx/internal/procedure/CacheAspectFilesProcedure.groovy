@@ -37,6 +37,8 @@ import java.util.jar.JarFile
  */
 @Slf4j
 class CacheAspectFilesProcedure extends AbsProcedure {
+
+
     CacheAspectFilesProcedure(Project project, VariantCache variantCache, TransformInvocation transformInvocation) {
         super(project, variantCache, transformInvocation)
         log.error("CacheAspectFilesProcedure ")
@@ -44,22 +46,28 @@ class CacheAspectFilesProcedure extends AbsProcedure {
 
     @Override
     boolean doWorkContinuously() {
-        log.error("~~~~~~~~~~~~~~~~~~~~cache aspect files")
+        log.error("doWorkContinuously")
         //缓存aspect文件
         BatchTaskScheduler batchTaskScheduler = new BatchTaskScheduler()
 
-        transformInvocation.inputs.each { TransformInput input ->
-            input.directoryInputs.each { DirectoryInput dirInput ->
-//                    collect aspect file
+        transformInvocation.inputs.each { input ->
+            //输出项目所有class 文件的路径
+            input.directoryInputs.each { dirInput ->
+//                log.error("~~~~~~~~~~~~collect  dirInput :" + dirInput.file.absolutePath)
                 batchTaskScheduler.addTask(new ITask() {
                     @Override
                     Object call() throws Exception {
+                        //log.error("~~~~~~~~~~~~collect eachFileRecurse:" + dirInput.file.toPath().toString())
                         dirInput.file.eachFileRecurse { File item ->
+                            //输出所有class文件位置
+                            //log.error("~~~~~~~~~~~~collect aspect transformInvocation file:" + item.absolutePath)
                             if (AJXUtils.isAspectClass(item)) {
-                                log.error("~~~~~~~~~~~~~~~~~~~~cache aspect files").debug("~~~~~~~~~~~~collect aspect file:${item.absolutePath}")
+                                log.error(TAG + "directoryInputs aspectFile:" + item.absolutePath)
                                 String path = item.absolutePath
                                 String subPath = path.substring(dirInput.file.absolutePath.length())
                                 File cacheFile = new File(variantCache.aspectPath + subPath)
+                                log.error(TAG + "directoryInputs aspectCacheFile :" + item.absolutePath)
+
                                 variantCache.add(item, cacheFile)
                             }
                         }
@@ -68,7 +76,9 @@ class CacheAspectFilesProcedure extends AbsProcedure {
                     }
                 })
             }
-
+            log.error(TAG + "-------------------------------")
+            //输出项目所有jar 文件的路径
+            //log.error("~~~~~~~~~~~~collect  jarInputs :" + it.file.absolutePath)
             input.jarInputs.each { JarInput jarInput ->
 //                    collect aspect file
                 batchTaskScheduler.addTask(new ITask() {
@@ -83,7 +93,7 @@ class CacheAspectFilesProcedure extends AbsProcedure {
                                 byte[] bytes = ByteStreams.toByteArray(jarFile.getInputStream(jarEntry))
                                 File cacheFile = new File(variantCache.aspectPath + File.separator + entryName)
                                 if (AJXUtils.isAspectClass(bytes)) {
-                                    log.error("~~~~~~~~~~~collect aspect file:${entryName}")
+                                    log.error(TAG + "jarInputs aspectCacheFile :" + cacheFile.absolutePath)
                                     variantCache.add(bytes, cacheFile)
                                 }
                             }

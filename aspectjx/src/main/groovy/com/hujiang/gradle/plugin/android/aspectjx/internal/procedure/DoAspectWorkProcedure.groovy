@@ -42,11 +42,9 @@ class DoAspectWorkProcedure extends AbsProcedure {
     @Override
     boolean doWorkContinuously() {
         //do aspectj real work
-        log.debug("DoAspectWorkProcedure do aspectj real work")
         ajxTaskManager.aspectPath << variantCache.aspectDir
         ajxTaskManager.classPath << variantCache.includeFileDir
         ajxTaskManager.classPath << variantCache.excludeFileDir
-
         //process class files
         AJXTask ajxTask = new AJXTask(project)
         File includeJar = transformInvocation.getOutputProvider().getContentLocation("include", variantCache.contentTypes,
@@ -66,14 +64,15 @@ class DoAspectWorkProcedure extends AbsProcedure {
         transformInvocation.inputs.each { TransformInput input ->
             input.jarInputs.each { JarInput jarInput ->
                 ajxTaskManager.classPath << jarInput.file
-                log.debug("DoAspectWorkProcedure" + jarInput.file.path)
+//                log.debug("DoAspectWorkProcedure" + jarInput.file.path)
 
                 if (variantCache.isIncludeJar(jarInput.file.absolutePath)) {
                     AJXTask ajxTask1 = new AJXTask(project)
                     ajxTask1.inPath << jarInput.file
-
+//                    log.error(TAG + "isIncludeJar jarInput:" + jarInput.file)
                     File outputJar = transformInvocation.getOutputProvider().getContentLocation(jarInput.name, jarInput.getContentTypes(),
                             jarInput.getScopes(), Format.JAR)
+//                    log.error(TAG + "directoryInputs aspectFile:" + outputJar.absolutePath)
                     if (!outputJar.getParentFile()?.exists()) {
                         outputJar.getParentFile()?.mkdirs()
                     }

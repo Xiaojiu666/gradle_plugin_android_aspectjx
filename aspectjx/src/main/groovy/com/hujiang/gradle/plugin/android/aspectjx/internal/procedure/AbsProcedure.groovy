@@ -28,6 +28,8 @@ import org.gradle.api.Project
  */
 abstract class AbsProcedure {
 
+    def String TAG = getClass().name + " : "
+
     List<? extends AbsProcedure> procedures = new ArrayList<>()
     Project project
     AJXCache ajxCache

@@ -18,6 +18,7 @@ package com.hujiang.gradle.plugin.android.aspectjx
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
+import com.android.build.gradle.LibraryExtension
 import com.hujiang.gradle.plugin.android.aspectjx.internal.TimeTrace
 import groovy.util.logging.Slf4j
 import org.gradle.api.Plugin
@@ -48,14 +49,15 @@ class AJXPlugin implements Plugin<Project> {
         }
 
         project.extensions.create("aspectjx", AJXExtension)
-
-        if (project.plugins.hasPlugin(AppPlugin)) {
-            log.error("AJXPlugin " + project.plugins.hasPlugin(AppPlugin))
-            //build time trace
-            project.gradle.addListener(new TimeTrace())
-            //register AspectTransform
-            AppExtension android = project.extensions.getByType(AppExtension)
-            android.registerTransform(new AJXTransform(project))
-        }
+        //TODO 去掉注释
+//        if (project.plugins.hasPlugin(AppPlugin)) {
+        log.error("AJXPlugin " + project.plugins.hasPlugin(AppPlugin))
+        //build time trace
+        project.gradle.addListener(new TimeTrace())
+        //register AspectTransform
+        //TODO AppExtension
+        LibraryExtension android = project.extensions.getByType(LibraryExtension)
+        android.registerTransform(new AJXTransform(project))
+//        }
     }
 }
