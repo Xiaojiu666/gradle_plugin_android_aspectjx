@@ -72,13 +72,13 @@ class DoAspectWorkProcedure extends AbsProcedure {
 //                    log.error(TAG + "isIncludeJar jarInput:" + jarInput.file)
                     File outputJar = transformInvocation.getOutputProvider().getContentLocation(jarInput.name, jarInput.getContentTypes(),
                             jarInput.getScopes(), Format.JAR)
-//                    log.error(TAG + "directoryInputs aspectFile:" + outputJar.absolutePath)
+                    log.error("DoAspectWorkProcedure directoryInputs outputJar absolutePath:" + outputJar.absolutePath)
                     if (!outputJar.getParentFile()?.exists()) {
                         outputJar.getParentFile()?.mkdirs()
                     }
 
                     ajxTask1.outputJar = outputJar.absolutePath
-
+                    log.error("DoAspectWorkProcedure directoryInputs  ajxTask1 outputJar:" +  ajxTask1.outputJar)
                     ajxTaskManager.addTask(ajxTask1)
                 }
             }
