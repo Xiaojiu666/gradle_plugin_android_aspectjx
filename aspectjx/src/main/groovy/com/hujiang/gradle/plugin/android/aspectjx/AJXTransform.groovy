@@ -79,7 +79,7 @@ class AJXTransform extends Transform {
     //TODO 换回SCOPE_FULL_PROJECT
     @Override
     Set<QualifiedContent.Scope> getScopes() {
-        return TransformManager.PROJECT_ONLY
+        return TransformManager.SCOPE_FULL_PROJECT
     }
 
     /**

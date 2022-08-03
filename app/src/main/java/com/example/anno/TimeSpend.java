@@ -1,4 +1,4 @@
-package com.example.mylibrary.anno;
+package com.example.anno;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

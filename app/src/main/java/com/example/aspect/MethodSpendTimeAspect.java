@@ -1,9 +1,8 @@
-package com.example.mylibrary.aspect;
+package com.example.aspect;
 
 import android.util.Log;
 
-import com.example.mylibrary.anno.TimeSpend;
-
+import com.example.anno.TimeSpend;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
