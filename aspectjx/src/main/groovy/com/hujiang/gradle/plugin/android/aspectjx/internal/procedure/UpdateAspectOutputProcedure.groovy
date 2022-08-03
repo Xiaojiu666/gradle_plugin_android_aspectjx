@@ -21,6 +21,7 @@ import com.android.build.api.transform.TransformInvocation
 import com.hujiang.gradle.plugin.android.aspectjx.internal.AJXTask
 import com.hujiang.gradle.plugin.android.aspectjx.internal.AJXTaskManager
 import com.hujiang.gradle.plugin.android.aspectjx.internal.cache.VariantCache
+import groovy.util.logging.Slf4j
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
 
@@ -30,11 +31,13 @@ import org.gradle.api.Project
  * @version 1.0.0
  * @since 2018-04-23
  */
+@Slf4j
 class UpdateAspectOutputProcedure extends AbsProcedure {
     AJXTaskManager ajxTaskManager
 
     UpdateAspectOutputProcedure(Project project, VariantCache variantCache, TransformInvocation transformInvocation) {
         super(project, variantCache, transformInvocation)
+        log.error("UpdateAspectOutputProcedure")
         ajxTaskManager = new AJXTaskManager(encoding: ajxCache.encoding, ajcArgs: ajxCache.ajxExtensionConfig.ajcArgs, bootClassPath: ajxCache.bootClassPath,
                             sourceCompatibility: ajxCache.sourceCompatibility, targetCompatibility: ajxCache.targetCompatibility)
     }

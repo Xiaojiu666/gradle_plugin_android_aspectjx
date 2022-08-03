@@ -33,8 +33,10 @@ import org.gradle.api.Project
  */
 @Slf4j
 class CacheInputFilesProcedure extends AbsProcedure {
+
     CacheInputFilesProcedure(Project project, VariantCache variantCache, TransformInvocation transformInvocation) {
         super(project, variantCache, transformInvocation)
+        log.error("CacheInputFilesProcedure")
     }
 
     @Override

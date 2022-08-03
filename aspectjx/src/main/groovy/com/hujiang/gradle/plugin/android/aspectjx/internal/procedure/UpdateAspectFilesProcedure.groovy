@@ -20,6 +20,7 @@ import com.hujiang.gradle.plugin.android.aspectjx.internal.AJXUtils
 import com.hujiang.gradle.plugin.android.aspectjx.internal.cache.VariantCache
 import com.hujiang.gradle.plugin.android.aspectjx.internal.concurrent.BatchTaskScheduler
 import com.hujiang.gradle.plugin.android.aspectjx.internal.concurrent.ITask
+import groovy.util.logging.Slf4j
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
 
@@ -32,9 +33,11 @@ import java.util.jar.JarFile
  * @version 1.0.0
  * @since 2018-04-23
  */
+@Slf4j
 class UpdateAspectFilesProcedure extends AbsProcedure {
     UpdateAspectFilesProcedure(Project project, VariantCache variantCache, TransformInvocation transformInvocation) {
         super(project, variantCache, transformInvocation)
+        log.error("UpdateAspectFilesProcedure")
     }
 
     @Override
