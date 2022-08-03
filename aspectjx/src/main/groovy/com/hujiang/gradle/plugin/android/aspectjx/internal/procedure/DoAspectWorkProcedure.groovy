@@ -65,7 +65,7 @@ class DoAspectWorkProcedure extends AbsProcedure {
         transformInvocation.inputs.each { TransformInput input ->
             input.jarInputs.each { JarInput jarInput ->
                 ajxTaskManager.classPath << jarInput.file
-//                log.debug("DoAspectWorkProcedure" + jarInput.file.path)
+                log.error("DoAspectWorkProcedure jarInput " + jarInput.file.path)
 
                 if (variantCache.isIncludeJar(jarInput.file.absolutePath)) {
                     AJXTask ajxTask1 = new AJXTask(project)
@@ -73,7 +73,7 @@ class DoAspectWorkProcedure extends AbsProcedure {
 //                    log.error(TAG + "isIncludeJar jarInput:" + jarInput.file)
                     File outputJar = transformInvocation.getOutputProvider().getContentLocation(jarInput.name, jarInput.getContentTypes(),
                             jarInput.getScopes(), Format.JAR)
-                    log.error("DoAspectWorkProcedure directoryInputs outputJar absolutePath:" + outputJar.absolutePath)
+//                    log.error("DoAspectWorkProcedure directoryInputs outputJar absolutePath:" + outputJar.absolutePath)
                     if (!outputJar.getParentFile()?.exists()) {
                         outputJar.getParentFile()?.mkdirs()
                     }

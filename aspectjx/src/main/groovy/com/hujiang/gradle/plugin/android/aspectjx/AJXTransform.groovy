@@ -41,7 +41,7 @@ class AJXTransform extends Transform {
 
     AJXTransform(Project proj) {
         ajxProcedure = new AJXProcedure(proj)
-        log.error("AJXTransform" + proj)
+        log.error("AJXTransform " + proj)
     }
 
     @Override

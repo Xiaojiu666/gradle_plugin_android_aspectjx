@@ -34,7 +34,7 @@ class UpdateInputFilesProcedure extends AbsProcedure {
 
     UpdateInputFilesProcedure(Project project, VariantCache variantCache, TransformInvocation transformInvocation) {
         super(project, variantCache, transformInvocation)
-        log.error("UpdateInputFilesProcedure")
+        log.D("UpdateInputFilesProcedure")
     }
 
     @Override

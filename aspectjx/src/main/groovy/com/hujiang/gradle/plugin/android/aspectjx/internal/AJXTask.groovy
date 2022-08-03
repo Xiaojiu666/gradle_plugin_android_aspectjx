@@ -15,6 +15,7 @@
 package com.hujiang.gradle.plugin.android.aspectjx.internal
 
 import com.hujiang.gradle.plugin.android.aspectjx.internal.concurrent.ITask
+import groovy.util.logging.Slf4j
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
@@ -27,6 +28,7 @@ import org.gradle.api.Project
  * @version 1.0.0
  * @since 2018-03-14
  */
+@Slf4j
 class AJXTask implements ITask {
     def String TAG = getClass().name + " : "
 
@@ -46,8 +48,12 @@ class AJXTask implements ITask {
         project = proj
     }
 
+
+
     @Override
     Object call() throws Exception {
+        log.error("AJXTask call" + toString() )
+
         final def log = project.logger
         def args = [
                 "-showWeaveInfo",
@@ -119,5 +125,23 @@ class AJXTask implements ITask {
         }
 
         return null
+    }
+
+    @Override
+    public String toString() {
+        return "AJXTask{" +
+                "TAG='" + TAG + '\'' +
+                ", project=" + project +
+                ", encoding='" + encoding + '\'' +
+                ", inPath=" + inPath +
+                ", aspectPath=" + aspectPath +
+                ", classPath=" + classPath +
+                ", ajcArgs=" + ajcArgs +
+                ", bootClassPath='" + bootClassPath + '\'' +
+                ", sourceCompatibility='" + sourceCompatibility + '\'' +
+                ", targetCompatibility='" + targetCompatibility + '\'' +
+                ", outputDir='" + outputDir + '\'' +
+                ", outputJar='" + outputJar + '\'' +
+                '}';
     }
 }
