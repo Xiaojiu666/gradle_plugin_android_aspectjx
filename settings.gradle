@@ -1,4 +1,3 @@
-rootProject.name = "Aspcectjx"
+rootProject.name = "GradleStudy"
 include ':app'
-include ':aspectjx'
-include ':mylibrary'
+

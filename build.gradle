@@ -1,4 +1,3 @@
-apply from: 'ext.gradle'
 apply plugin: 'maven'
 
 buildscript {
