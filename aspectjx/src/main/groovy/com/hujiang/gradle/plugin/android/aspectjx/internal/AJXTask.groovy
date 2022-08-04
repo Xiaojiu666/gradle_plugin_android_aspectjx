@@ -49,10 +49,9 @@ class AJXTask implements ITask {
     }
 
 
-
     @Override
     Object call() throws Exception {
-        log.error("AJXTask call" + toString() )
+        log.error("AJXTask call" + toString())
 
         final def log = project.logger
         def args = [
@@ -83,7 +82,7 @@ class AJXTask implements ITask {
             args << outputJar
         }
 
-        if(ajcArgs != null && !ajcArgs.isEmpty()) {
+        if (ajcArgs != null && !ajcArgs.isEmpty()) {
             if (!ajcArgs.contains('-Xlint')) {
                 args.add('-Xlint:ignore')
             }
@@ -97,7 +96,7 @@ class AJXTask implements ITask {
             args.add('-warn:none')
         }
 
-        inPath.each {File file ->
+        inPath.each { File file ->
 //            log.error(TAG + "directoryInputs aspectFile:" + file.absolutePath)
 //            project.logger.debug("~~~~~~~~~~~~~input file: ${file.absolutePath}")
         }
@@ -111,14 +110,18 @@ class AJXTask implements ITask {
                 case IMessage.ERROR:
                 case IMessage.FAIL:
                     log.error message.message, message.thrown
+                    log.error("AJXTask IMessage.FAIL" + message.message + " , "+message.thrown )
                     throw new GradleException(message.message, message.thrown)
                 case IMessage.WARNING:
                     log.warn message.message, message.thrown
+                    log.error("AJXTask IMessage.WARNING" + message.message + " , "+message.thrown )
                     break
                 case IMessage.INFO:
+                    log.error("AJXTask IMessage.INFO" + message.message + " , "+message.thrown )
                     log.info message.message, message.thrown
                     break
                 case IMessage.DEBUG:
+                    log.error("AJXTask IMessage.DEBUG" + message.message + " , "+message.thrown )
                     log.debug message.message, message.thrown
                     break
             }
