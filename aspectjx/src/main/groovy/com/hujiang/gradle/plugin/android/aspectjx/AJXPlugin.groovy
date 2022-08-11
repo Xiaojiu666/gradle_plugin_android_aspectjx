@@ -51,7 +51,7 @@ class AJXPlugin implements Plugin<Project> {
 
         project.extensions.create("aspectjx", AJXExtension)
         //TODO 去掉注释
-//        if (project.plugins.hasPlugin(AppPlugin)) {
+        if (project.plugins.hasPlugin(AppPlugin)) {
         log.error("AJXPlugin " + project.plugins.hasPlugin(AppPlugin))
         log.error("AJXPlugin  extensions " + project.extensions.toString())
         //build time trace
@@ -60,6 +60,6 @@ class AJXPlugin implements Plugin<Project> {
         //TODO AppExtension
         AppExtension android = project.extensions.getByType(AppExtension)
         android.registerTransform(new AJXTransform(project))
-//        }
+        }
     }
 }
