@@ -25,7 +25,7 @@ public class TimePlugin implements Plugin<Project> {
              * 1、准备待分析的class
              */
             FileInputStream fis = new FileInputStream
-                    ("xxxxx/test/java/InjectTest.class");
+                    ("/Users/edz/StudioProjects/gradle_plugin_android_aspectjx/app/src/main/java/com/example/test/InjectTest.class");
             cr = new ClassReader(fis);
             // 写出器 COMPUTE_FRAMES 自动计算所有的内容，后续操作更简单
             ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
@@ -36,11 +36,11 @@ public class TimePlugin implements Plugin<Project> {
              * 3、获得结果并输出
              */
             byte[] newClassBytes = cw.toByteArray();
-            File file = new File("xxx/test/java2/");
+            File file = new File("/Users/edz/StudioProjects/gradle_plugin_android_aspectjx/app/src/main/java/com/example/test2");
             file.mkdirs();
 
             FileOutputStream fos = new FileOutputStream
-                    ("xxx/test/java2/InjectTest.class");
+                    ("/Users/edz/StudioProjects/gradle_plugin_android_aspectjx/app/src/main/java/com/example/test2/InjectTest.class");
             fos.write(newClassBytes);
 
             fos.close();
