@@ -19,6 +19,7 @@ import org.apache.commons.compress.utils.IOUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +34,10 @@ import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
 
+import groovy.util.logging.Log;
+import groovy.util.logging.Slf4j;
+
+@Slf4j
 public class TimeTransform extends Transform {
 
 
@@ -98,10 +103,12 @@ public class TimeTransform extends Transform {
             Collection<DirectoryInput> directoryInputs = transFromInput.getDirectoryInputs();
             for (DirectoryInput directoryInput :
                     directoryInputs) {
+
                 handleDirectoryInput(directoryInput, outputProvider);
             }
             Collection<JarInput> jarInputs = transFromInput.getJarInputs();
             for (JarInput jarInput : jarInputs) {
+                System.out.println("jarInput " + jarInput.getName());
                 handleJarInput(jarInput, outputProvider);
             }
         }
@@ -115,18 +122,25 @@ public class TimeTransform extends Transform {
      */
     public void handleDirectoryInput(DirectoryInput directoryInput, TransformOutputProvider outputProvider) throws IOException {
         File file = directoryInput.getFile();
-        File[] files = file.listFiles();
-        if (file.isDirectory()) {
-            for (File subFile :
-                    files) {
-                String name = subFile.getName();
-                if (isClassFile(name)) {
-                    dealClassFile4AddTime(subFile);
+        getFile(file);
+        File contentLocation = outputProvider.getContentLocation(directoryInput.getName(), directoryInput.getContentTypes(), directoryInput.getScopes(), Format.DIRECTORY);
+        FileUtils.copyDirectory(directoryInput.getFile(), contentLocation);
+    }
+
+    public void getFile(File file) {
+        if (file != null) {
+            File[] f = file.listFiles();
+            if (f != null) {
+                for (int i = 0; i < f.length; i++) {
+                    getFile(f[i]);
+                }
+            } else {
+                System.out.println("subFile : " + file);
+                if (isClassFile(file.getName())) {
+                    dealClassFile4AddTime(file);
                 }
             }
         }
-        File contentLocation = outputProvider.getContentLocation(directoryInput.getName(), directoryInput.getContentTypes(), directoryInput.getScopes(), Format.DIRECTORY);
-        FileUtils.copyDirectory(directoryInput.getFile(), contentLocation);
     }
 
     /**
@@ -187,6 +201,7 @@ public class TimeTransform extends Transform {
     boolean isClassFile(String name) {
         return (name.endsWith(".class") && !name.startsWith("R")
                 && "R.class" != name && "BuildConfig.class" != name);
+//        return name.endsWith("MainActivity.class");
     }
 
 
