@@ -51,9 +51,9 @@ class AJXTask implements ITask {
 
     @Override
     Object call() throws Exception {
-        log.error("AJXTask call" + toString())
+//        log.error("AJXTask call" + toString())
 
-        final def log = project.logger
+//        final def log = project.logger
         def args = [
                 "-showWeaveInfo",
                 "-encoding", encoding,

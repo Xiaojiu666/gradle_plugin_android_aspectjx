@@ -14,7 +14,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 public class MethodSpendTimeAspect {
     private static final String TAG = "MethodSpendTimeAspect";
 
-    @Pointcut("execution(@com.example.mylibrary.anno.TimeSpend * *(..))") //execution call
+    @Pointcut("execution(@com.example.anno.TimeSpend * *(..))") //execution call
     public void methodTime() {}
 
     @Around("methodTime()")
